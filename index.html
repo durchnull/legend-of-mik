@@ -5,12 +5,12 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#11152a">
 <title>The Legend of Mik</title>
-<meta name="description" content="A birthday legend in seven panels. Tap, scribble, hold &amp; smash your way through another year.">
+<meta name="description" content="Level 37 unlocked. A birthday legend in seven panels: tap, scribble, hold &amp; smash your way through another year.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://durchnull.github.io/legend-of-mik/">
 <meta property="og:title" content="The Legend of Mik">
-<meta property="og:description" content="A birthday legend in seven panels. Tap, scribble, hold &amp; smash your way through another year.">
-<meta property="og:image" content="https://durchnull.github.io/legend-of-mik/preview.jpg">
+<meta property="og:description" content="Level 37 unlocked. A birthday legend in seven panels: tap, scribble, hold &amp; smash your way through another year.">
+<meta property="og:image" content="https://durchnull.github.io/legend-of-mik/preview.jpg?v=37">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="The Legend of Mik – comic title card">
@@ -235,6 +235,46 @@ button{font:inherit;color:inherit}
 .fbtns{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:20px;animation:fadeup .6s 2.2s both}
 .fbtns .cbtn:first-child{background:var(--yellow)}
 .fbtns .cbtn:last-child{background:var(--red);color:#fff;-webkit-text-stroke:.6px #000}
+.fname .b37{display:inline-block;width:1em;height:1em;margin-left:.1em;vertical-align:-.04em;animation:b37In .8s 1.7s both cubic-bezier(.2,1.6,.4,1),b37Wob 3s 2.6s ease-in-out infinite}
+.b37 svg{display:block;width:100%;height:100%;overflow:visible}
+@keyframes b37In{from{transform:scale(0) rotate(-220deg)}}
+@keyframes b37Wob{0%,100%{rotate:-10deg}50%{rotate:8deg;scale:1.08}}
+.c4{grid-column:1/-1;animation-delay:2.1s;rotate:-.5deg}
+.nh{font-family:Bangers,Impact,sans-serif;font-size:32px;letter-spacing:1.5px;color:var(--red);line-height:1;margin-bottom:12px}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-bottom:16px}
+.tile{background:var(--yellow);border:2.5px solid #000;box-shadow:3px 3px 0 #000;padding:8px 10px;text-align:center}
+.tile b{display:block;font-family:Bangers,Impact,sans-serif;font-weight:400;font-size:clamp(20px,3vw,26px);letter-spacing:.5px;line-height:1.1}
+.tile span{display:block;font-weight:700;font-size:13px;opacity:.8}
+.facts{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:9px 18px;font-size:15.5px;line-height:1.35}
+.facts li{display:flex;gap:9px;align-items:flex-start}
+.facts li>i{font-style:normal;font-size:20px;line-height:1.1;flex:none}
+.trickb{font:inherit;font-weight:700;color:var(--blue);background:#fff;border:2px dashed var(--blue);border-radius:8px;padding:0 6px;cursor:pointer}
+.trickb.bump{animation:bump .5s}
+.rand{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:14px;margin-top:16px}
+.randout{min-width:84px;font-family:Bangers,Impact,sans-serif;font-size:48px;line-height:1;color:var(--yellow);-webkit-text-stroke:2px #000;paint-order:stroke fill;text-shadow:3px 3px 0 #000;text-align:center}
+.randout.land{animation:land .5s cubic-bezier(.2,1.6,.4,1)}
+@keyframes land{from{scale:1.9;rotate:-14deg}}
+.randnote{text-align:center;font-weight:700;margin:8px 0 0;min-height:1.35em}
+
+/* ---------- 37 candles ---------- */
+#cake{position:fixed;inset:0;z-index:15;display:flex;justify-content:center;padding:calc(60px + env(safe-area-inset-top)) 12px calc(120px + env(safe-area-inset-bottom));background:rgba(8,10,24,.74);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);opacity:0;transition:opacity .8s;touch-action:none}
+#cake.show{opacity:1}
+.cwrap{width:min(680px,100%);height:100%;display:flex;flex-direction:column;align-items:center;gap:4px}
+.ctitle{flex:none;font-family:Bangers,Impact,sans-serif;font-size:clamp(36px,8vw,64px);letter-spacing:2px;line-height:1;color:var(--yellow);-webkit-text-stroke:2px #000;paint-order:stroke fill;text-shadow:4px 4px 0 #000,7px 7px 0 var(--red)}
+.ctitle.pop{animation:bump .5s}
+#cakeSvg{flex:1 1 0;min-height:0;width:100%;overflow:visible;cursor:crosshair}
+#cake.show #cakeSvg{animation:cakeIn .8s cubic-bezier(.2,1.4,.4,1) both}
+@keyframes cakeIn{from{opacity:0;transform:translateY(60px) scale(.8)}}
+.cfact{flex:none;max-width:560px;text-align:center;color:#fff;font-weight:700;font-size:clamp(15px,2.4vw,18px);line-height:1.35;text-shadow:2px 2px 0 #000;opacity:0;translate:0 10px;transition:opacity .6s,translate .6s}
+.cfact.show{opacity:1;translate:0 0}
+.cdl .fl{opacity:0;transition:opacity .2s;transform-box:fill-box;transform-origin:50% 100%}
+.cdl.lit .fl{opacity:1}
+.cdl .fk{transform-box:fill-box;transform-origin:50% 100%;animation:flick .38s ease-in-out infinite alternate}
+@keyframes flick{to{transform:scale(.88,1.12) rotate(5deg)}}
+#cakeSvg.gust .fl{animation:lean .6s ease-out}
+@keyframes lean{30%{transform:skewX(-28deg) scaleY(.8)}}
+.smoke{fill:none;stroke:rgba(235,235,245,.85);stroke-width:4;stroke-linecap:round;transform-box:fill-box;transform-origin:50% 100%;animation:smoke 1.5s ease-out forwards;pointer-events:none}
+@keyframes smoke{from{opacity:.95;transform:scaleY(.4)}to{opacity:0;transform:translateY(-34px) scale(1.6,1.3)}}
 
 @media (prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;animation-iteration-count:1!important}}
 </style>
@@ -278,9 +318,17 @@ button{font:inherit;color:inherit}
     <div class="kicker">★ A BIRTHDAY LEGEND IN SEVEN PANELS ★</div>
     <div class="the">THE LEGEND OF</div>
     <h1 class="tname" id="tname"></h1>
-    <div class="tsub">Episode: <b>“Another Year”</b></div>
+    <div class="tsub">Episode 37: <b>“Prime Time”</b></div>
     <button class="bigbtn" id="start">▶ START THE QUEST</button>
-    <div class="tnote">🔊 Sound on &nbsp;·&nbsp; 🥚 10 easter eggs hidden &nbsp;·&nbsp; tap, scribble, hold &amp; smash</div>
+    <div class="tnote">🔊 Sound on &nbsp;·&nbsp; 🥚 12 easter eggs hidden &nbsp;·&nbsp; tap, scribble, hold &amp; smash</div>
+  </div>
+</section>
+
+<section id="cake" hidden>
+  <div class="cwrap">
+    <div class="ctitle" id="ctitle">MAKE A WISH</div>
+    <svg id="cakeSvg" viewBox="0 34 600 478" aria-label="A birthday cake with 37 candles"></svg>
+    <div class="cfact" id="cfact">🕯️ Fun fact: 37 candles fit a perfect hexagon (1 + 6 + 12 + 18). 37 is a “centered hexagonal number”, so this cake is mathematically flawless.</div>
   </div>
 </section>
 
@@ -290,18 +338,38 @@ button{font:inherit;color:inherit}
     <div class="fname" id="fname"></div>
     <div class="fcards">
       <div class="card c1">
-        <div class="lvlh">⭐ LEVEL UP! ⭐</div>
-        <div class="lvls">Another year of experience gained.</div>
+        <div class="lvlh">⭐ LEVEL 37! ⭐</div>
+        <div class="lvls">Level 36 → 37. Another year of XP gained.</div>
         <div class="stat"><span>Wisdom</span><i style="--v:.82"></i><b>+10</b></div>
         <div class="stat"><span>Beard power</span><i style="--v:1;--d:.15s"></i><b>MAX</b></div>
         <div class="stat"><span>Monster slaying</span><i style="--v:.9;--d:.3s"></i><b>+1 BEAST</b></div>
         <div class="stat"><span>Cake capacity</span><i style="--v:1;--d:.45s"></i><b>∞</b></div>
         <div class="stat"><span>Legend status</span><i style="--v:1;--d:.6s"></i><b>CONFIRMED</b></div>
+        <div class="stat"><span>Prime condition</span><i style="--v:1;--d:.75s"></i><b>PRIME!</b></div>
       </div>
       <div class="card c2">
         <div class="gh">🎁 YOUR GIFT</div>
         <p class="gtext" id="giftText"></p>
         <p class="gfrom" id="giftFrom"></p>
+      </div>
+      <div class="card c4">
+        <div class="nh">🔢 37, BY THE NUMBERS</div>
+        <div class="tiles">
+          <div class="tile"><b id="nDays">13,514</b><span>days on Earth</span></div>
+          <div class="tile"><b id="nSecs">…</b><span>seconds, and counting</span></div>
+          <div class="tile"><b id="nBeats">…</b><span>heartbeats, give or take</span></div>
+          <div class="tile"><b id="nKm">…</b><span>km flown around the sun</span></div>
+        </div>
+        <ul class="facts">
+          <li><i>🥇</i><div><b>37 is a prime number.</b> You are officially in your prime.</div></li>
+          <li><i>⛰️</i><div><b>It’s the 12th prime.</b> 12 months climbed, one prime year reached.</div></li>
+          <li><i>🌡️</i><div><b>37 °C</b> is normal body temperature. Running at exactly the right heat.</div></li>
+          <li><i>🧬</i><div>A human body has roughly <b>37 trillion cells</b>. That’s one trillion per year of awesome.</div></li>
+          <li><i>🪞</i><div><b>Flip it: 73.</b> Also prime: the 21st. 12 ↔ 21. Mirror magic.</div></li>
+          <li><i>✖️</i><div><b>Party trick:</b> <button class="trickb" id="trick">37 × 3 = 111</button> <small>(tap it)</small></div></li>
+        </ul>
+        <div class="rand"><button class="cbtn" id="bRand">🎲 PICK A RANDOM NUMBER</button><div class="randout" id="randOut">?</div></div>
+        <p class="randnote" id="randNote"></p>
       </div>
     </div>
     <div class="fbtns">
@@ -323,8 +391,9 @@ button{font:inherit;color:inherit}
 /* ================= EDIT ME ================= */
 const CONFIG = {
   name: 'Mik',
-  gift: 'Inside the box: one brand-new year. 365 fresh days, countless adventures and only a few small monsters. Use it well, legend!',
+  gift: 'Inside the box: Level 37. 365 fresh days, countless adventures and only a few small monsters. Use it well, legend!',
   from: 'With love, from your fellow adventurers',
+  born: '1989-10-09',
 };
 /* =========================================== */
 
@@ -338,11 +407,11 @@ const TEXT = {
   cap2: `Wanted: ${CONFIG.name}. Crime: being way too awesome.`,
   cap3: '12 months. All of them uphill.',
   cap4: 'Then came… the Beast of Adulting!',
-  bub6a: 'Another year conquered. Not bad, legend.',
+  bub6a: '37 years conquered. Not bad, legend.',
   bub6b: '…wait. What’s that sparkle behind me?',
   bub7a: 'Wait… is that for ME?!',
   bub7b: 'Best. Birthday. EVER!',
-  older: ['Another year… older?!', '…and wiser. Mostly.'],
+  older: ['Another year… older?!', '37 is prime. So are you.'],
 };
 
 const EGGS = {
@@ -356,6 +425,8 @@ const EGGS = {
   star:     { t: 'Star catcher', d: 'Bonus wish unlocked.', h: 'Watch the evening sky closely. Be quick!' },
   crown:    { t: 'Birthday royalty', d: 'Long live the legend!', h: 'The birthday card hides a tiny crown.' },
   konami:   { t: 'Cheat code: infinite cake', d: 'Some codes never get old.', h: 'Type ↑↑↓↓←→←→BA, or tap the 🥚 counter 7× fast.' },
+  breath:   { t: 'Lungs of a legend', d: 'All 37 candles in under 2 seconds!', h: 'Blow out all 37 candles in under 2 seconds. No BLOW button.' },
+  random:   { t: 'Truly random', d: '37. Every. Single. Time.', h: 'Ask the finale for a random number. Then ask again. And again.' },
 };
 const EGG_KEYS = Object.keys(EGGS);
 
@@ -540,6 +611,8 @@ const Snd = (() => {
       });
     },
     boing() { tone(220, .35, { type: 'sine', to: 660, vol: .18 }); },
+    light(i) { tone(N(60 + [0, 2, 4, 7, 9][i % 5] + 12 * (Math.floor(i / 5) % 3)), .07, { type: 'triangle', vol: .06 }); noise(.04, { f: 3000, q: 2, vol: .03 }); },
+    puff() { noise(.24, { f: 1100 + Math.random() * 900, fto: 400, q: .6, vol: .13, a: .03 }); },
   };
   function holdTone(ms) {
     if (!ac) return () => {};
@@ -1058,6 +1131,7 @@ async function stepP3() {
           Snd.fx.fanfare();
           sfx('SUMMIT!', 165, 560, { fs: 76, r: -8, dur: 1700 });
           FX.confetti(...toScreen(165, 540), 90, { power: 750 });
+          setTimeout(() => { sfx('LEVEL 37!', 165, 628, { fs: 48, c: '#ff8fd8', r: -4, dur: 1800 }); Snd.fx.sparkle(); }, 500);
           if (fast) { await wait(800); sfx('SPEEDRUN!', 165, 690, { fs: 46, c: '#7fd1ff', r: 6, dur: 1600 }); egg('speedrun'); }
           res();
         }, 380);
@@ -1066,7 +1140,7 @@ async function stepP3() {
     showAct('CLIMB! ⛰️', () => climb && climb());
   });
   meter(null);
-  setHint('Summit reached! But up here, something is waiting…');
+  setHint('Summit reached! <small>37 is the 12th prime number: 12 months, one <b>prime</b> year.</small> But up here, something is waiting…');
   await next();
 }
 
@@ -1344,7 +1418,145 @@ async function stepP7() {
   await wait(1400);
 }
 
+/* ================= INTERLUDE — 37 candles ================= */
+const cakeEl = $('#cake'), cakeSvg = $('#cakeSvg'), ctitle = $('#ctitle');
+const CANDLES = [];
+let cakeDone = null, cakeReady = false, cakeT0 = 0, cakeGusted = false;
+
+function buildCake() {
+  let seed = 37; const rnd = () => (seed = (seed * 9301 + 49297) % 233280) / 233280;
+  const COLS = ['#ff6b57', '#5ab0ff', '#3ddc84', '#ffd23f', '#ff8fd8', '#b388ff'];
+  /* frosting drips along the front edge of the cake top */
+  const n = 24, arc = [];
+  for (let i = 0; i <= n; i++) { const t = Math.PI - i * Math.PI / n; arc.push([300 + 260 * Math.cos(t), 200 + 115 * Math.sin(t), Math.sin(t)]); }
+  const drop = arc.map(([x, y], i) => [x, y + (i === 0 || i === n ? 0 : i % 2 ? 7 : 16 + rnd() * 30)]);
+  let edge = `M${drop[0][0]} ${drop[0][1]}`;
+  for (let i = 1; i < n; i++) edge += ` Q${drop[i][0].toFixed(1)} ${drop[i][1].toFixed(1)} ${((drop[i][0] + drop[i + 1][0]) / 2).toFixed(1)} ${((drop[i][1] + drop[i + 1][1]) / 2).toFixed(1)}`;
+  edge += ` L${drop[n][0]} ${drop[n][1]}`;
+  const band = edge + arc.slice().reverse().map(([x, y, s]) => ` L${x.toFixed(1)} ${(y - 8 * s).toFixed(1)}`).join('') + 'Z';
+  let sprinkles = '';
+  for (let i = 0; i < 46; i++) {
+    const a = rnd() * 6.283, d = Math.sqrt(rnd()), x = (300 + Math.cos(a) * d * 232).toFixed(1), y = (200 + Math.sin(a) * d * 98).toFixed(1);
+    sprinkles += `<rect x="${x}" y="${y}" width="10" height="3.4" rx="1.7" fill="${COLS[i % 6]}" transform="rotate(${(rnd() * 180).toFixed(0)} ${x} ${y})"/>`;
+  }
+  /* 37 = a centered hexagonal number: 1 + 6 + 12 + 18 candles, three rings around one */
+  const cells = [];
+  for (let q = -3; q <= 3; q++) for (let r = -3; r <= 3; r++) {
+    const ring = Math.max(Math.abs(q), Math.abs(r), Math.abs(q + r));
+    if (ring > 3) continue;
+    const x = 300 + 38 * Math.sqrt(3) * (q + r / 2), y = 203 + 38 * 1.5 * r * .5;
+    cells.push({ x, y, ring, ang: Math.atan2(y - 203, x - 300) });
+  }
+  cells.sort((a, b) => a.y - b.y || a.x - b.x);
+  const candles = cells.map((c, i) => `<g class="cdl" data-i="${i}" transform="translate(${c.x.toFixed(1)} ${c.y.toFixed(1)})">
+    <ellipse cx="0" cy="1" rx="9" ry="3.5" fill="rgba(0,0,0,.18)"/>
+    <rect x="-5.5" y="-36" width="11" height="37" rx="2" fill="${c.ring ? COLS[i % 6] : '#ffd23f'}" stroke="#111" stroke-width="2.5"/>
+    <path d="M-5 -24 L5 -30 M-5 -10 L5 -16" stroke="rgba(255,255,255,.75)" stroke-width="3"/>
+    <path d="M0 -36 V-43" stroke="#111" stroke-width="2.2" stroke-linecap="round"/>
+    <g class="fl"><circle cx="0" cy="-53" r="24" fill="url(#ckHalo)"/><g class="fk" style="animation-delay:${(-rnd()).toFixed(2)}s"><path d="M0 -70 C8 -59 10 -50 0 -42 C-10 -50 -8 -59 0 -70Z" fill="#ffd23f" stroke="#e8402c" stroke-width="2"/><path d="M0 -59 C3.5 -54 3.5 -49 0 -46 C-3.5 -49 -3.5 -54 0 -59Z" fill="#fff"/></g></g>
+  </g>`).join('');
+  cakeSvg.innerHTML = `<defs><radialGradient id="ckHalo"><stop offset="0" stop-color="#ffd98a" stop-opacity=".9"/><stop offset="1" stop-color="#ffb347" stop-opacity="0"/></radialGradient></defs>
+    <ellipse id="ckGlow" cx="300" cy="130" rx="330" ry="170" fill="url(#ckHalo)" opacity="0" style="transition:opacity .4s"/>
+    <ellipse cx="300" cy="422" rx="292" ry="84" fill="#e3e9f7" stroke="#111" stroke-width="4"/>
+    <ellipse cx="300" cy="416" rx="248" ry="64" fill="none" stroke="rgba(0,0,0,.08)" stroke-width="3"/>
+    <path d="M40 200 V300 A260 115 0 0 0 560 300 V200 Z" fill="#f59ac0" stroke="#111" stroke-width="4" stroke-linejoin="round"/>
+    <path d="M41 232 A260 115 0 0 0 559 232" fill="none" stroke="#ffd23f" stroke-width="10"/>
+    <ellipse cx="300" cy="200" rx="260" ry="115" fill="#fff6ea" stroke="#111" stroke-width="4"/>
+    <path d="${band}" fill="#fff6ea"/>
+    <path d="${edge}" fill="none" stroke="#111" stroke-width="4" stroke-linejoin="round"/>
+    ${sprinkles}
+    <text x="300" y="404" text-anchor="middle" font-family="Bangers,Impact,sans-serif" font-size="40" letter-spacing="2" fill="#fff" stroke="#111" stroke-width="7" paint-order="stroke">HAPPY 37TH!</text>
+    ${candles}`;
+  cakeSvg.querySelectorAll('.cdl').forEach((g, i) => CANDLES.push({ ...cells[i], g, lit: false }));
+}
+const candlesLeft = () => CANDLES.filter(c => c.lit).length;
+function cakeGlow() { $('#ckGlow').style.opacity = (candlesLeft() / 37 * .9).toFixed(2); }
+function blowCandle(c) {
+  if (!c.lit) return;
+  c.lit = false; c.g.classList.remove('lit');
+  const sm = document.createElementNS(SVGNS, 'path');
+  sm.setAttribute('d', 'M0 -44 c-7 -8 7 -15 0 -23 c-7 -8 7 -15 0 -23');
+  sm.setAttribute('class', 'smoke');
+  c.g.appendChild(sm); setTimeout(() => sm.remove(), 1600);
+  Snd.fx.puff();
+  if (!cakeT0) cakeT0 = performance.now();
+  const left = candlesLeft();
+  meter((37 - left) / 37, left + ' LEFT'); cakeGlow();
+  if (!left && cakeDone) { const f = cakeDone; cakeDone = null; cakeReady = false; f(performance.now() - cakeT0); }
+}
+function segDist(x, y, ax, ay, bx, by) {
+  const dx = bx - ax, dy = by - ay, l = dx * dx + dy * dy;
+  const t = l ? Math.max(0, Math.min(1, ((x - ax) * dx + (y - ay) * dy) / l)) : 0;
+  return Math.hypot(x - ax - t * dx, y - ay - t * dy);
+}
+function sweep(a, b) {
+  if (!cakeReady) return;
+  for (const c of CANDLES) if (c.lit && [62, 44, 24].some(o => segDist(c.x, c.y - o, a[0], a[1], b[0], b[1]) < 24)) blowCandle(c);
+}
+function gust() {
+  if (!cakeReady) return;
+  cakeGusted = true;
+  Snd.fx.whoosh();
+  cakeSvg.classList.remove('gust'); void cakeSvg.getBoundingClientRect(); cakeSvg.classList.add('gust');
+  CANDLES.filter(c => c.lit).sort(() => Math.random() - .5).slice(0, 5 + (Math.random() * 4 | 0)).forEach((c, i) => setTimeout(() => blowCandle(c), i * 45));
+}
+function svgPt(e) {
+  const m = cakeSvg.getScreenCTM();
+  if (!m) return null;
+  const p = new DOMPoint(e.clientX, e.clientY).matrixTransform(m.inverse());
+  return [p.x, p.y];
+}
+let cLast = null, cDown = false;
+cakeEl.addEventListener('pointerdown', e => { cDown = true; try { cakeEl.setPointerCapture(e.pointerId); } catch (_) {} cLast = svgPt(e); if (cLast) sweep(cLast, cLast); });
+cakeEl.addEventListener('pointermove', e => {
+  if (!cDown && e.pointerType !== 'mouse') return;
+  const p = svgPt(e);
+  if (p && cLast) sweep(cLast, p);
+  cLast = p;
+});
+const cUp = () => { cDown = false; cLast = null; };
+cakeEl.addEventListener('pointerup', cUp); cakeEl.addEventListener('pointercancel', cUp); cakeEl.addEventListener('pointerleave', () => { cLast = null; });
+
+async function stepCake() {
+  setStep('cake', 8);
+  buildCake();
+  cakeEl.hidden = false;
+  requestAnimationFrame(() => cakeEl.classList.add('show'));
+  setHint('🎂 Hold on. One more thing…');
+  Snd.fx.whoosh();
+  await wait(1000);
+  const order = CANDLES.slice().sort((a, b) => a.ring - b.ring || a.ang - b.ang);
+  for (let i = 0; i < order.length; i++) {
+    order[i].lit = true; order[i].g.classList.add('lit');
+    ctitle.textContent = i + 1;
+    Snd.fx.light(i); cakeGlow();
+    await wait(reduced ? 10 : 42);
+  }
+  ctitle.textContent = '37 CANDLES'; ctitle.classList.add('pop');
+  Snd.fx.chime();
+  setHint('🎂 Make a wish, then <b>swipe across the candles</b> to blow them out!');
+  meter(0, '37 LEFT');
+  cakeReady = true;
+  const ms = await new Promise(res => { cakeDone = res; showAct('BLOW! 💨', gust); });
+  hideAct(); meter(null);
+  ctitle.textContent = 'WISH GRANTED!'; ctitle.classList.remove('pop'); void ctitle.offsetWidth; ctitle.classList.add('pop');
+  Snd.fx.fanfare();
+  const r = cakeSvg.getBoundingClientRect();
+  FX.confetti(r.left + r.width / 2, r.top + r.height * .3, 170, { power: 950 });
+  if (ms < 2000 && !cakeGusted) egg('breath');
+  await wait(700);
+  $('#cfact').classList.add('show');
+  setHint('All 37 candles out! 🎉 <small>Wish locked in.</small>');
+  await next('PARTY');
+  cakeEl.classList.remove('show');
+  setTimeout(() => { cakeEl.hidden = true; }, 800);
+}
+
 /* ================= FINALE ================= */
+const BADGE37 = (() => {
+  const star = (n, r1, r2) => Array.from({ length: n * 2 }, (_, i) => { const a = i * Math.PI / n - Math.PI / 2, r = i % 2 ? r2 : r1; return `${(50 + Math.cos(a) * r).toFixed(1)},${(50 + Math.sin(a) * r).toFixed(1)}`; }).join(' ');
+  return `<svg viewBox="0 0 100 100" aria-label="37"><polygon points="${star(14, 50, 39)}" fill="#e8402c" stroke="#000" stroke-width="4" stroke-linejoin="round"/><polygon points="${star(14, 41, 32)}" fill="#ffd23f"/><text x="50" y="52" text-anchor="middle" dominant-baseline="central" font-family="Bangers,Impact,sans-serif" font-size="46" letter-spacing="1" fill="#fff" stroke="#000" stroke-width="7" paint-order="stroke">37</text></svg>`;
+})();
 function fillLetters(el, text, spaceCls) {
   el.innerHTML = '';
   [...text].forEach((c, i) => {
@@ -1366,7 +1578,8 @@ function openFinale(fresh) {
   if (fresh) {
     const hb = $('#hb'); fillLetters(hb, 'HAPPY BIRTHDAY', 'sp');
     const fn = $('#fname'); fillLetters(fn, NAME + '!', '');
-    fn.style.fontSize = `min(180px, 21vh, ${Math.floor(85 / Math.max(3, NAME.length + 1) * 1.7)}vw)`;
+    mk('i', 'b37', fn).innerHTML = BADGE37;
+    fn.style.fontSize = `min(180px, 21vh, ${Math.floor(85 / Math.max(3, NAME.length + 2) * 1.7)}vw)`;
   }
   requestAnimationFrame(() => finEl.classList.add('show'));
 }
@@ -1401,6 +1614,42 @@ $('#viewport').addEventListener('click', e => {
   if (!id || zoomed === id) { zoomed = null; cam(FULL, 900); return; }
   zoomed = id; Snd.fx.blip(); cam(pad(G[id].box), 900);
 });
+/* ---------- 37, by the numbers ---------- */
+const BORN = (([y, m, d]) => new Date(y, m - 1, d))(CONFIG.born.split('-').map(Number));
+function tickNumbers() {
+  const s = Math.max(0, (Date.now() - BORN) / 1000), f = v => Math.floor(v).toLocaleString('en-US');
+  $('#nDays').textContent = f(s / 86400);
+  $('#nSecs').textContent = f(s);
+  $('#nBeats').textContent = f(s * 1.2);
+  $('#nKm').textContent = f(s * 29.78);
+}
+tickNumbers(); setInterval(tickNumbers, 1000);
+let trickK = 1;
+$('#trick').addEventListener('click', e => {
+  trickK = trickK % 9 + 1;
+  e.currentTarget.textContent = `37 × ${trickK * 3} = ${String(trickK).repeat(3)}`;
+  e.currentTarget.classList.remove('bump'); void e.currentTarget.offsetWidth; e.currentTarget.classList.add('bump');
+  Snd.fx.pop();
+});
+let rolls = 0, rolling = false;
+$('#bRand').addEventListener('click', async () => {
+  if (rolling) return;
+  rolling = true;
+  const out = $('#randOut');
+  out.classList.remove('land');
+  for (let i = 0; i < 14; i++) { out.textContent = 1 + (Math.random() * 100 | 0); Snd.fx.tick(); await wait(45 + i * 9); }
+  out.textContent = '37'; void out.offsetWidth; out.classList.add('land');
+  Snd.fx.chime();
+  const r = out.getBoundingClientRect();
+  FX.sparks(r.left + r.width / 2, r.top + r.height / 2, 30);
+  rolls++;
+  $('#randNote').innerHTML = rolls === 1 ? 'Huh. 37. What are the odds?'
+    : rolls === 2 ? '…37 again?! Pure coincidence, surely.'
+    : 'Ask people for a “random” number from 1 to 100 and <b>37</b> comes up surprisingly often. This die agrees.';
+  if (rolls >= 3 && egg('random')) renderEggs();
+  rolling = false;
+});
+
 $('#bSong').addEventListener('click', () => { Snd.song(); FX.show(4000); });
 $('#bView').addEventListener('click', () => { Snd.fx.blip(); viewComic(); });
 $('#bAgain').addEventListener('click', () => location.reload());
@@ -1433,7 +1682,7 @@ async function start() {
   setHint(TEXT.establishing);
   await wait(2000);
   try {
-    await stepP1(); await stepP2(); await stepP3(); await stepP4(); await stepP5(); await stepP6(); await stepP7();
+    await stepP1(); await stepP2(); await stepP3(); await stepP4(); await stepP5(); await stepP6(); await stepP7(); await stepCake();
     await finale();
   } catch (err) { console.error(err); }
 }
