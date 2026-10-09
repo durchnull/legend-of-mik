@@ -110,8 +110,8 @@ button{font:inherit;color:inherit}
 .doodle .fill{opacity:0;animation:fadein .4s ease-out forwards}
 .doodle text{font-family:Bangers,Impact,sans-serif;font-size:30px;fill:#e8402c;stroke:#111;stroke-width:1.2;opacity:0;animation:fadein .3s forwards}
 @keyframes fadein{to{opacity:1}}
-.stamp{position:absolute;pointer-events:none;transform:translate(-100%,-50%) rotate(-6deg);padding:4px 8px 5px;border:3px solid currentColor;outline:1.5px solid currentColor;outline-offset:2px;border-radius:6px;color:#cf2a24;font-size:9.5px;font-weight:700;line-height:1.2;letter-spacing:.4px;text-align:center;text-transform:uppercase;white-space:pre;mix-blend-mode:multiply;opacity:.88;animation:stampIn .3s cubic-bezier(.2,.9,.3,1.15) both}
-.stamp b{display:block;font-family:Bangers,Impact,sans-serif;font-weight:400;font-size:19px;letter-spacing:1.5px;line-height:1.05}
+.cstamp{position:absolute;pointer-events:none;transform:translate(-100%,-50%) rotate(-6deg);font-family:Bangers,Impact,sans-serif;background:rgba(255,255,255,.78);padding:4px 8px 5px;border:3px solid currentColor;outline:1.5px solid currentColor;outline-offset:2px;border-radius:6px;color:#cf2a24;font-size:9.5px;font-weight:700;line-height:1.2;letter-spacing:.4px;text-align:center;text-transform:uppercase;white-space:pre;mix-blend-mode:multiply;opacity:.88;animation:stampIn .3s cubic-bezier(.2,.9,.3,1.15) both}
+.cstamp b{display:block;font-family:Bangers,Impact,sans-serif;font-weight:400;font-size:19px;letter-spacing:1.5px;line-height:1.05}
 @keyframes stampIn{from{opacity:0;transform:translate(-100%,-50%) rotate(-14deg) scale(1.9)}}
 .dark{position:absolute;background:#04050a;transition:opacity 1.9s ease;pointer-events:none}
 .dark.gone{opacity:0}
@@ -1107,7 +1107,7 @@ async function stepP2() {
   T.cap2 = textBox('cap', 927, 73, 120, 72, 15);
   await type(T.cap2, TEXT.cap2);
   await wait(400);
-  const st = mk('div', 'stamp', over, { left: px(1000), top: px(385) });
+  const st = mk('div', 'cstamp', over, { left: px(1000), top: px(385) });
   const [stTitle, ...stLines] = TEXT.stamp;
   mk('b', '', st).textContent = stTitle;
   st.append(stLines.join('\n'));
