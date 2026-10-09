@@ -110,6 +110,9 @@ button{font:inherit;color:inherit}
 .doodle .fill{opacity:0;animation:fadein .4s ease-out forwards}
 .doodle text{font-family:Bangers,Impact,sans-serif;font-size:30px;fill:#e8402c;stroke:#111;stroke-width:1.2;opacity:0;animation:fadein .3s forwards}
 @keyframes fadein{to{opacity:1}}
+.stamp{position:absolute;pointer-events:none;transform:translate(-100%,-50%) rotate(-6deg);padding:4px 8px 5px;border:3px solid currentColor;outline:1.5px solid currentColor;outline-offset:2px;border-radius:6px;color:#cf2a24;font-size:9.5px;font-weight:700;line-height:1.2;letter-spacing:.4px;text-align:center;text-transform:uppercase;white-space:pre;mix-blend-mode:multiply;opacity:.88;animation:stampIn .3s cubic-bezier(.2,.9,.3,1.15) both}
+.stamp b{display:block;font-family:Bangers,Impact,sans-serif;font-weight:400;font-size:19px;letter-spacing:1.5px;line-height:1.05}
+@keyframes stampIn{from{opacity:0;transform:translate(-100%,-50%) rotate(-14deg) scale(1.9)}}
 .dark{position:absolute;background:#04050a;transition:opacity 1.9s ease;pointer-events:none}
 .dark.gone{opacity:0}
 .glint{position:absolute;width:30px;height:30px;margin:-15px 0 0 -15px;pointer-events:none;background:linear-gradient(transparent 46%,#fff 46% 54%,transparent 54%),linear-gradient(90deg,transparent 46%,#fff 46% 54%,transparent 54%),radial-gradient(circle,#fff 0 14%,transparent 45%);filter:drop-shadow(0 0 5px #bfe8ff)}
@@ -405,6 +408,7 @@ const TEXT = {
   establishing: 'Seven empty panels. One legend. Let’s fill them in…',
   cap1: '…another quest. Beyond those peaks, a legendary gift awaits its hero.',
   cap2: `Wanted: ${CONFIG.name}. Crime: being way too awesome.`,
+  stamp: [`Art © ${CONFIG.name}`, 'Used without asking', 'Royalties: 1 cake'],
   cap3: '12 months. All of them uphill.',
   cap4: 'Then came… the Beast of Adulting!',
   bub6a: '37 years conquered. Not bad, legend.',
@@ -612,6 +616,7 @@ const Snd = (() => {
     },
     boing() { tone(220, .35, { type: 'sine', to: 660, vol: .18 }); },
     light(i) { tone(N(60 + [0, 2, 4, 7, 9][i % 5] + 12 * (Math.floor(i / 5) % 3)), .07, { type: 'triangle', vol: .06 }); noise(.04, { f: 3000, q: 2, vol: .03 }); },
+    stamp() { tone(150, .16, { type: 'sine', to: 55, vol: .35 }); noise(.09, { ft: 'lowpass', f: 900, vol: .3 }); },
     puff() { noise(.24, { f: 1100 + Math.random() * 900, fto: 400, q: .6, vol: .13, a: .03 }); },
   };
   function holdTone(ms) {
@@ -1087,6 +1092,12 @@ async function stepP2() {
   await wait(600);
   T.cap2 = textBox('cap', 927, 73, 120, 72, 15);
   await type(T.cap2, TEXT.cap2);
+  await wait(400);
+  const st = mk('div', 'stamp', over, { left: px(1000), top: px(385) });
+  const [stTitle, ...stLines] = TEXT.stamp;
+  mk('b', '', st).textContent = stTitle;
+  st.append(stLines.join('\n'));
+  Snd.fx.stamp(); shake(PANEL.p2, 3, 160);
   hot(800, 225, 190, 230, 'The sketched face', hatEgg);
   setHint('There’s our hero. Looking legendary.');
   await next();
