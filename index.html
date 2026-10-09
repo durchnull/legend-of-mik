@@ -289,6 +289,36 @@ button{font:inherit;color:inherit}
 .smoke{fill:none;stroke:rgba(235,235,245,.85);stroke-width:4;stroke-linecap:round;transform-box:fill-box;transform-origin:50% 100%;animation:smoke 1.5s ease-out forwards;pointer-events:none}
 @keyframes smoke{from{opacity:.95;transform:scaleY(.4)}to{opacity:0;transform:translateY(-34px) scale(1.6,1.3)}}
 
+/* ---------- secret level: Monday returns ---------- */
+#eggBtn.gold{position:relative;background:linear-gradient(#fff6c4,#ffd23f)}
+#eggBtn.gold::after{content:"";position:absolute;inset:-6px;border:3px solid var(--yellow);border-radius:14px;box-shadow:0 0 12px rgba(255,210,63,.8);animation:ringpulse 1.2s ease-in-out infinite;pointer-events:none}
+.tc.tsecret{cursor:pointer;color:#fff}
+.tc.tsecret b{color:var(--yellow)}
+.tc.tsecret:focus-visible{outline:4px dashed var(--yellow);outline-offset:3px}
+.eggs li.lock,.eggs li.secret{grid-column:1/-1;margin-top:6px}
+.eggs li.secret{display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px}
+.eggs li.secret span{opacity:1;font-weight:700}
+.eggs li.secret .cbtn.mbtn{background:#1d1240;color:var(--yellow);-webkit-text-stroke:.6px #000;animation:pulse2 1.4s ease-in-out infinite}
+.mlayer{position:absolute;inset:0;pointer-events:none}
+#p5 .pimg{transition:filter 1.8s}
+.panel.monday .pimg{filter:grayscale(.75) sepia(.3) hue-rotate(190deg) brightness(.7) contrast(1.2)}
+.mrain{position:absolute;rotate:10deg;pointer-events:none;opacity:0;transition:opacity 1.2s;background:url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='60' height='90'><g stroke='rgba(215,230,255,.6)' stroke-width='2' stroke-linecap='round'><path d='M10 4v18M42 38v18M24 66v18M54 12v12'/></g></svg>") 0 0/60px 90px;animation:mrain .38s linear infinite}
+.mrain.on{opacity:.9}
+@keyframes mrain{from{transform:translateY(-90px)}}
+.tb.mcap{background:#fff;border:3px solid #111;box-shadow:3px 3px 0 #111;padding:2px 6px}
+.mtag{position:absolute;width:104px;translate:-50% -50%;background:#fff;border:2.5px solid #111;border-radius:7px;overflow:hidden;text-align:center;line-height:1.1;box-shadow:3px 3px 0 rgba(0,0,0,.5)}
+.mtag i{display:block;background:#e8402c;color:#fff;font-style:normal;font-family:Bangers,Impact,sans-serif;font-size:16px;letter-spacing:1px;padding-top:3px}
+.mtag small{display:block;background:#e8402c;color:#fff;font-size:8px;font-weight:700;letter-spacing:.5px;padding-bottom:3px}
+.mtag b{display:block;font-style:italic;font-size:21px;color:#1b2a8f;padding:3px 0 4px;rotate:-3deg}
+.hp.mon .hpb{background:#1a0b2e}
+.hp.mon .hpb i{background:linear-gradient(#c9a6ff,#6a35e0)}
+.mtgt{z-index:2}
+.mtgt::before{content:"";position:absolute;inset:-10px;border-radius:50%;background:radial-gradient(circle,#fff 0 10%,#ffe066 20%,rgba(255,80,40,.9) 42%,rgba(255,60,30,0) 70%);animation:glowp .8s ease-in-out infinite}
+.mtgt::after{content:"";position:absolute;inset:4px;border-radius:50%;border:4px dashed #fff;box-shadow:0 0 0 3px rgba(0,0,0,.6),inset 0 0 0 3px rgba(0,0,0,.6);animation:ringspin 3s linear infinite}
+.chore{position:absolute;z-index:3;width:64px;height:64px;translate:-50% -50%;display:grid;place-items:center;padding:0;background:#fff27a;border:2.5px solid #111;border-radius:3px;box-shadow:3px 3px 0 rgba(0,0,0,.55);font-size:34px;line-height:1;cursor:pointer;pointer-events:auto}
+.chore:focus-visible{outline:4px dashed var(--yellow);outline-offset:2px}
+.medal{position:absolute;translate:-50% -50%;overflow:visible;pointer-events:none;filter:drop-shadow(5px 5px 0 rgba(0,0,0,.45));animation:b37Wob 3s 1s ease-in-out infinite}
+
 @media (prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;animation-iteration-count:1!important}}
 </style>
 </head>
@@ -430,6 +460,8 @@ const TEXT = {
   bub7a: 'Wait… is that for ME?!',
   bub7b: 'Best. Birthday. EVER!',
   older: ['Another year… older?!', '37 is prime. So are you.'],
+  monA: 'Monday, 7:00 AM. Guess who’s back.',
+  monB: 'Monday: cancelled. See you next week.',
 };
 
 const EGGS = {
@@ -632,6 +664,12 @@ const Snd = (() => {
     light(i) { tone(N(60 + [0, 2, 4, 7, 9][i % 5] + 12 * (Math.floor(i / 5) % 3)), .07, { type: 'triangle', vol: .06 }); noise(.04, { f: 3000, q: 2, vol: .03 }); },
     stamp() { tone(150, .16, { type: 'sine', to: 55, vol: .35 }); noise(.09, { ft: 'lowpass', f: 900, vol: .3 }); },
     puff() { noise(.24, { f: 1100 + Math.random() * 900, fto: 400, q: .6, vol: .13, a: .03 }); },
+    alarm() { for (let i = 0; i < 14; i++) tone(i % 2 ? 2100 : 1750, .05, { at: i * .065, vol: .07 }); },
+    clang() { tone(620, .18, { type: 'triangle', to: 560, vol: .09 }); tone(1340, .12, { type: 'triangle', vol: .05 }); noise(.06, { ft: 'highpass', f: 3000, vol: .06 }); },
+    toss() { tone(520, .22, { type: 'sine', to: 240, vol: .07 }); noise(.18, { f: 1400, fto: 500, q: .8, vol: .06 }); },
+    swat() { noise(.1, { f: 1800, q: .7, vol: .3 }); tone(300, .1, { type: 'sine', to: 900, vol: .12 }); },
+    laugh() { [0, .2, .4, .6].forEach((t, i) => tone(190 - i * 18, .16, { at: t, type: 'sawtooth', to: 120 - i * 10, vol: .14 })); },
+    beep() { tone(N(84), .08, { vol: .07 }); },
   };
   function holdTone(ms) {
     if (!ac) return () => {};
@@ -889,27 +927,36 @@ function target(x, y, r, label, actLabel, o = {}) {
 /* ---------- eggs ---------- */
 const found = new Set((() => { try { return JSON.parse(load('eggs') || '[]'); } catch (e) { return []; } })().filter(k => EGGS[k]));
 const eggCountEl = $('#eggCount');
+const allEggs = () => found.size === EGG_KEYS.length;
 function updEggs(bump) {
   eggCountEl.textContent = `${found.size}/${EGG_KEYS.length}`;
-  if (bump) { const b = $('#eggBtn'); b.classList.remove('bump'); void b.offsetWidth; b.classList.add('bump'); }
+  const b = $('#eggBtn');
+  b.classList.toggle('gold', allEggs());
+  if (bump) { b.classList.remove('bump'); void b.offsetWidth; b.classList.add('bump'); }
 }
 updEggs();
 function egg(key) {
   if (found.has(key)) return false;
   found.add(key); save('eggs', JSON.stringify([...found]));
   Snd.fx.egg(); updEggs(true);
+  if (!finEl.hidden) renderEggs();
   const e = EGGS[key];
   toast(`<div class="te">🥚</div><div><div class="t1">EASTER EGG ${found.size}/${EGG_KEYS.length}</div><div class="t2">${e.t}</div><div class="t3">${e.d}</div></div>`);
-  if (found.size === EGG_KEYS.length) setTimeout(() => { toast('<div class="te">🏆</div><div><div class="t1">ALL EGGS FOUND</div><div class="t2">True legend status unlocked!</div></div>', 4500); FX.confetti(innerWidth / 2, innerHeight * .3, 160); }, 4200);
+  if (allEggs()) setTimeout(() => {
+    toast('<div class="te">🏆</div><div><div class="t1">ALL EGGS FOUND</div><div class="t2">True legend status unlocked!</div><div class="t3">…and a secret level just woke up. 😈</div></div>', 5200);
+    FX.confetti(innerWidth / 2, innerHeight * .3, 160);
+    setTimeout(() => { Snd.fx.rumble(); shakeScreen(5, 1200); }, 1600);
+  }, 4200);
   return true;
 }
 let eggTaps = [];
 $('#eggBtn').addEventListener('click', () => {
+  if (allEggs() && monSafe()) { Snd.fx.egg(); enterMonday('game'); return; }
   const now = performance.now();
   eggTaps = eggTaps.filter(t => now - t < 2200); eggTaps.push(now);
   if (eggTaps.length >= 7) { eggTaps = []; partyMode(); return; }
   Snd.fx.blip();
-  toast(`<div class="te">🥚</div><div><div class="t1">EASTER EGGS: ${found.size}/${EGG_KEYS.length}</div><div class="t3">${found.size < EGG_KEYS.length ? 'Keep poking things. Seriously, everything.' : 'You found them all. Legendary!'}</div></div>`, 2600);
+  toast(`<div class="te">🥚</div><div><div class="t1">EASTER EGGS: ${found.size}/${EGG_KEYS.length}</div><div class="t3">${!allEggs() ? 'Keep poking things. Seriously, everything.' : 'You found them all! A secret level waits at the end.'}</div></div>`, 2600);
 });
 function partyMode() {
   egg('konami');
@@ -939,7 +986,7 @@ addEventListener('keydown', e => {
   konami(e);
   if (e.key === 'm' || e.key === 'M') { toggleMute(); return; }
   if (e.code !== 'Space' && e.key !== 'Enter') return;
-  if (!started) { e.preventDefault(); start(); return; }
+  if (!started) { if (e.target.closest && e.target.closest('#tSecret')) return; e.preventDefault(); start(); return; }
   if (holdKeys && e.code === 'Space') { e.preventDefault(); if (!e.repeat) holdKeys.start(); return; }
   if (e.repeat) { e.preventDefault(); return; }
   if (nextResolve) { e.preventDefault(); nextResolve(); return; }
@@ -1224,7 +1271,9 @@ async function stepP4() {
 /* ================= PANEL 5 — the fight ================= */
 const HIT_WORDS = ['SLASH!', 'KRAK!', 'WHAM!', 'POW!', 'THWACK!', 'BAM!', 'ZING!', 'KA-POW!'];
 const DMG = ['−MONDAYS', '−TAXES', '−LAUNDRY', '−EMAILS', '−BACK PAIN', '−DEADLINES', '−TRAFFIC', '−ALARM CLOCKS', '−BILLS', '−MEETINGS', '−DISHES', '−UPDATES', '−LOST SOCKS', '−PASSWORDS'];
-let hp = 100, hits = 0, fightDone = null, dmgPool = [];
+const deck = list => { let p = []; return () => { if (!p.length) p = list.slice().sort(() => Math.random() - .5); return p.pop(); }; };
+const dmgWord = deck(DMG);
+let hp = 100, hits = 0, fightDone = null;
 PANEL.p5.addEventListener('pointerdown', e => { if (fightDone) { const [x, y] = toPage(e.clientX, e.clientY); strike(x, y); } });
 function slashFx(x, y) {
   const s = mk('div', 'slash', over, { left: px(x), top: px(y) });
@@ -1232,10 +1281,9 @@ function slashFx(x, y) {
   s.animate([{ transform: `translate(-50%,-50%) rotate(${a}deg) scaleX(0)`, opacity: 1 }, { transform: `translate(-50%,-50%) rotate(${a}deg) scaleX(1)`, opacity: 1, offset: .35 }, { transform: `translate(-50%,-50%) rotate(${a}deg) scaleX(1.1)`, opacity: 0 }],
     { duration: 380, easing: 'ease-out' }).onfinish = () => s.remove();
 }
-function dmgLabel(x, y) {
-  if (!dmgPool.length) dmgPool = DMG.slice().sort(() => Math.random() - .5);
+function dmgLabel(x, y, text = dmgWord()) {
   const d = mk('div', 'dmg', over, { left: px(x), top: px(y) });
-  d.textContent = dmgPool.pop();
+  d.textContent = text;
   d.animate([{ transform: 'translate(-50%,-50%) scale(.4)', opacity: 0 }, { transform: 'translate(-50%,-90%) scale(1.1)', opacity: 1, offset: .2 }, { transform: 'translate(-50%,-260%) scale(1)', opacity: 0 }],
     { duration: 1100, easing: 'ease-out' }).onfinish = () => d.remove();
 }
@@ -1590,12 +1638,15 @@ function fillLetters(el, text, spaceCls) {
   });
 }
 function renderEggs() {
-  const n = found.size, all = n === EGG_KEYS.length;
+  const n = found.size, all = n === EGG_KEYS.length, best = +load('slayer');
   $('#eggHead').textContent = all ? `🏆 ALL ${n} EASTER EGGS FOUND. TRUE LEGEND!` : `🥚 EASTER EGGS FOUND: ${n} / ${EGG_KEYS.length}`;
   $('#eggList').innerHTML = EGG_KEYS.map(k => found.has(k)
     ? `<li class="got">🥚 <b>${EGGS[k].t}</b></li>`
-    : `<li>❔ <span>${EGGS[k].h}</span></li>`).join('');
+    : `<li>❔ <span>${EGGS[k].h}</span></li>`).join('') + (all
+    ? `<li class="secret"><button class="cbtn mbtn" id="bMonday">😈 SECRET LEVEL: MONDAY RETURNS ▸</button>${best ? `<span>🏅 Monday Slayer · best ${fmtS(best)}</span>` : ''}</li>`
+    : `<li class="lock">🔒 <span>???: find all ${EGG_KEYS.length} eggs to unlock it.</span></li>`);
 }
+$('#eggList').addEventListener('click', e => { if (e.target.closest('#bMonday')) enterMonday('game'); });
 function openFinale(fresh) {
   renderEggs();
   finEl.hidden = false;
@@ -1671,9 +1722,252 @@ $('#bRand').addEventListener('click', async () => {
   $('#randNote').innerHTML = rolls === 1 ? 'Huh. 37. What are the odds?'
     : rolls === 2 ? '…37 again?! Pure coincidence, surely.'
     : 'Ask people for a “random” number from 1 to 100 and <b>37</b> comes up surprisingly often. This die agrees.';
-  if (rolls >= 3 && egg('random')) renderEggs();
+  if (rolls >= 3) egg('random');
   rolling = false;
 });
+
+/* ================= SECRET LEVEL — Monday returns ================= */
+/* unlocked by all 12 eggs: a rematch in panel 5, 37 hits on a hopping weak spot in 37 seconds */
+const MON = { hits: 37, secs: 37, coffee: 5 };
+const MON_DMG = ['−INBOX ZERO', '−SMALL TALK', '−REPLY ALL', '−“QUICK” CALLS', '−PER MY LAST EMAIL', '−YOU’RE ON MUTE', '−COLD COFFEE', '−PRINTER JAMS', '−SNOOZE BUTTON', '−LOW BATTERY', '−CAPTCHAS', '−STANDUPS', '−CIRCLE BACK', '−SPAM', '−PARKING TICKETS', '−TO-DO LISTS', '−NEW PASSWORD RULES', '−TERMS & CONDITIONS'];
+const CHORES = [['📧', 'emails'], ['⏰', 'alarm clock'], ['🧾', 'bills'], ['🧺', 'laundry'], ['📞', 'phone call'], ['📅', 'meeting'], ['🧽', 'dishes'], ['🗂️', 'paperwork']];
+const MON_SPOTS = [[960, 652], [905, 525], [978, 505], [925, 600], [990, 590], [985, 725], [940, 770], [985, 860], [905, 880], [880, 700]];
+const MEDAL = `<svg viewBox="0 0 120 150" aria-label="Monday Slayer medal">
+  <path d="M38 70 L22 146 L42 134 L52 150 L62 80Z" fill="#e8402c" stroke="#111" stroke-width="4" stroke-linejoin="round"/>
+  <path d="M82 70 L98 146 L78 134 L68 150 L58 80Z" fill="#2d6cdf" stroke="#111" stroke-width="4" stroke-linejoin="round"/>
+  <circle cx="60" cy="58" r="52" fill="#ffd23f" stroke="#111" stroke-width="5"/>
+  <circle cx="60" cy="58" r="43" fill="none" stroke="#f0a500" stroke-width="3" stroke-dasharray="5 5"/>
+  <text x="60" y="60" text-anchor="middle" dominant-baseline="central" font-family="Bangers,Impact,sans-serif" font-size="32" letter-spacing="1" fill="#fff" stroke="#111" stroke-width="5" paint-order="stroke">MON</text>
+  <circle cx="60" cy="58" r="33" fill="none" stroke="#e8402c" stroke-width="7"/>
+  <path d="M37 35 L83 81" stroke="#e8402c" stroke-width="7" stroke-linecap="round"/>
+</svg>`;
+const monDmg = deck(MON_DMG);
+const fmtS = ms => (ms / 1000).toFixed(1) + ' s';
+const Mon = { on: false, fight: false, chores: new Set() };
+PANEL.p5.addEventListener('pointerdown', e => {
+  if (!Mon.fight) return;
+  const [x, y] = toPage(e.clientX, e.clientY);
+  Snd.fx.clang(); Mon.combo = 0;
+  sfx(pick(['CLANG!', 'MISS!', 'NOPE!', 'TINK!']), x, y - 30, { fs: 28, c: '#cfd8ff' });
+});
+
+function monSafe() { return !Mon.on && (state.free || !finEl.hidden); }
+async function enterMonday(from) {
+  if (Mon.on || !allEggs()) return;
+  Mon.on = true; Mon.from = from; Mon.tries = 0;
+  Mon.prev = { free: state.free, step: state.step };
+  state.free = false; state.step = 'monday'; zoomed = null;
+  Snd.init(); Snd.fx.whoosh();
+  if (from === 'title') {
+    started = true;
+    titleEl.classList.add('out');
+    setTimeout(() => { titleEl.hidden = true; }, 900);
+    hudEl.classList.remove('hide');
+    try { await document.fonts.ready; } catch (e) {}
+  } else {
+    finEl.classList.remove('show');
+    document.body.classList.remove('fin');
+    setTimeout(() => { finEl.hidden = true; }, 900);
+  }
+  barEl.classList.remove('hide');
+  await monRound(true);
+}
+function monStop() {
+  Mon.fight = false;
+  clearInterval(Mon.clock); clearTimeout(Mon.choreT); clearTimeout(Mon.hopT);
+  if (Mon.tgt) { Mon.tgt.remove(); Mon.tgt = null; }
+  Mon.chores.forEach(c => fadeRemove(c, 300)); Mon.chores.clear();
+  hideAct(); meter(null);
+}
+function monTeardown() {
+  monStop();
+  if (Mon.layer) Mon.layer.remove();
+  if (Mon.rain) Mon.rain.remove();
+  PANEL.p5.classList.remove('monday');
+}
+function monCap(text) {
+  const c = textBox('cap mcap', 835, 488, 240, 52, 17, -2);
+  Mon.layer.appendChild(c);
+  type(c, text);
+  return c;
+}
+function monTag(slap) {
+  const t = mk('div', 'mtag', Mon.layer, { left: '948px', top: '548px', rotate: '14deg' });
+  t.innerHTML = '<i>HELLO</i><small>MY NAME IS</small><b>MONDAY</b>';
+  if (!slap) return;
+  Snd.fx.stamp(); shake(PANEL.p5, 4, 200);
+  t.animate([{ transform: 'scale(2.6)', opacity: 0 }, { transform: 'scale(.92)', opacity: 1, offset: .6 }, { transform: 'none', opacity: 1 }], { duration: 420, easing: 'cubic-bezier(.3,0,.6,1)' });
+}
+async function monRound(intro) {
+  monTeardown();
+  nextBtn.hidden = true; nextResolve = null;
+  const p = PANEL.p5, L = Mon.layer = mk('div', 'mlayer', over);
+  cam(pad(G.p5.box), intro ? 1300 : 600);
+  setHint(intro ? '📅 Hmm. What day is it today?' : '☕ Coffee in hand. Round two…');
+  await wait(intro ? 1150 : 500);
+  if (!p.classList.contains('on')) { p.classList.add('on', 'rv-slam'); $('#sp5').classList.add('gone'); }
+  p.classList.add('monday');
+  Mon.rain = mk('div', 'mrain', p, { left: '560px', top: '330px', width: '540px', height: '700px' });
+  requestAnimationFrame(() => Mon.rain.classList.add('on'));
+  Mon.eye = mk('div', 'glow', L, { left: '960px', top: '652px', width: '84px', height: '84px', '--c': 'rgba(255,40,70,1)' });
+  Mon.hp = mk('div', 'hp mon', L, { left: '712px', top: '450px', width: '282px' });
+  Mon.hp.innerHTML = `<div class="hpl">MONDAY · ${MON.hits} HITS LEFT</div><div class="hpb"><i></i></div>`;
+  Mon.hpl = Mon.hp.firstChild; Mon.bar = Mon.hp.lastChild; Mon.fill = Mon.bar.firstChild;
+  if (intro) {
+    Snd.fx.alarm(); shake(p, 5, 700);
+    sfx('BRRRING!', 760, 530, { fs: 48, c: '#fff', r: -10, dur: 1300 });
+    await wait(900);
+    const cap = monCap(TEXT.monA);
+    await wait(1800);
+    Snd.fx.roar(); shakeScreen(8, 900); Mon.eye.classList.add('lit');
+    sfx('MONDAAAY!', 870, 610, { fs: 56, c: '#c9a6ff', r: -7, dur: 1700 });
+    await wait(1100);
+    monTag(true);
+    await wait(1100);
+    fadeRemove(cap, 400);
+  } else {
+    Mon.eye.classList.add('lit');
+    monTag(false);
+  }
+  const secs = MON.secs + Mon.tries * MON.coffee;
+  Mon.hp.classList.add('on');
+  setHint(`🎯 Hit the glowing <b>weak spot</b> ${MON.hits} times in ${secs} seconds! <small>Swat the chores out of the way.</small>`);
+  sfx('READY?', 827, 650, { fs: 64, r: -4, dur: 1000 });
+  await wait(1100);
+  Snd.fx.crit(); flash(.5);
+  sfx('FIGHT!', 827, 650, { fs: 92, r: -6, dur: 1000 });
+  monFight(secs);
+}
+function monFight(secs) {
+  Object.assign(Mon, { fight: true, hits: 0, combo: 0, last: 0, rage: false, spot: null, limit: secs * 1000, t0: performance.now() });
+  const t = Mon.tgt = mk('button', 'hot round mtgt', Mon.layer, { width: '72px', height: '72px' });
+  t.setAttribute('aria-label', 'The weak spot');
+  const hit = e => { if (e.type === 'click' && e.detail) return; e.stopPropagation(); monHit(); };
+  t.addEventListener('pointerdown', hit); t.addEventListener('click', hit);
+  monHop();
+  t.focus({ preventScroll: true });
+  Mon.choreT = setTimeout(monChore, 1600);
+  let lastSec = 99;
+  Mon.clock = setInterval(() => {
+    const left = Math.max(0, Mon.limit - (performance.now() - Mon.t0)), sec = Math.ceil(left / 1000);
+    meter(left / Mon.limit, (left / 1000).toFixed(1) + ' S');
+    if (sec <= 5 && sec < lastSec && left) Snd.fx.beep();
+    lastSec = sec;
+    if (!left) monLose();
+  }, 100);
+}
+function monHop() {
+  const t = Mon.tgt;
+  if (!t) return;
+  const prev = Mon.spot;
+  let s;
+  do s = pick(MON_SPOTS); while (prev && Math.hypot(s[0] - prev[0], s[1] - prev[1]) < 40);
+  Mon.spot = [s[0] + R(-8, 8), s[1] + R(-8, 8)];
+  t.style.left = px(Mon.spot[0]); t.style.top = px(Mon.spot[1]);
+  t.animate([{ scale: '0' }, { scale: '1.25', offset: .6 }, { scale: '1' }], { duration: 220, easing: 'ease-out' });
+  clearTimeout(Mon.hopT);
+  if (Mon.rage) Mon.hopT = setTimeout(monHop, 1300);
+}
+function monHit() {
+  if (!Mon.fight) return;
+  const now = performance.now();
+  Mon.combo = now - Mon.last < 800 ? Mon.combo + 1 : 1; Mon.last = now;
+  Mon.hits++;
+  const left = MON.hits - Mon.hits, [x, y] = Mon.spot;
+  const combo = Mon.combo % 5 === 0;
+  slashFx(x, y);
+  sfx(combo ? `COMBO ×${Mon.combo}!` : pick(HIT_WORDS), Math.min(930, x + R(-30, 20)), y + R(-70, -40), { fs: combo ? 50 : 42, c: combo ? '#ff8fd8' : pick(['#ffd23f', '#fff', '#c9a6ff']) });
+  if (combo) Snd.fx.sparkle();
+  dmgLabel(Math.min(920, x), y + 26, monDmg());
+  FX.rocks(...toScreen(x, y), 8);
+  shake(PANEL.p5, 5, 220);
+  Snd.fx.slash(); Snd.fx.hit();
+  Mon.fill.style.width = (left / MON.hits * 100) + '%';
+  Mon.hpl.textContent = `MONDAY · ${left} ${left === 1 ? 'HIT' : 'HITS'} LEFT`;
+  Mon.bar.classList.remove('hit'); void Mon.bar.offsetWidth; Mon.bar.classList.add('hit');
+  if (!left) { monWin(); return; }
+  if (Mon.hits === Math.ceil(MON.hits / 2)) monRage();
+  monHop();
+}
+function monRage() {
+  Mon.rage = true;
+  Snd.fx.roar(); shakeScreen(8, 600);
+  sfx('ENRAGED!', 827, 560, { fs: 64, r: -6, c: '#ff5a4d', dur: 1500 });
+  Object.assign(Mon.eye.style, { width: '120px', height: '120px' });
+  setHint('😤 Halfway! Now it’s <b>enraged</b>: the weak spot won’t sit still.');
+}
+function monChore() {
+  if (!Mon.fight) return;
+  if (Mon.chores.size < 4) {
+    const [ch, what] = pick(CHORES), x = R(700, 985), y = R(500, 890);
+    const c = mk('button', 'chore', Mon.layer, { left: px(x), top: px(y), rotate: R(-14, 14).toFixed(0) + 'deg' });
+    c.textContent = ch;
+    c.setAttribute('aria-label', 'Swat the ' + what);
+    Mon.chores.add(c);
+    c.animate([{ transform: `translate(${960 - x}px,${730 - y}px) scale(.2) rotate(-200deg)`, opacity: 0 }, { opacity: 1, offset: .2 }, { transform: 'none', opacity: 1 }], { duration: 650, easing: 'cubic-bezier(.3,.7,.4,1)' });
+    Snd.fx.toss();
+    const swat = e => { if (e.type === 'click' && e.detail) return; e.stopPropagation(); monSwat(c, x, y); };
+    c.addEventListener('pointerdown', swat); c.addEventListener('click', swat);
+  }
+  Mon.choreT = setTimeout(monChore, Mon.rage ? R(1500, 2100) : R(2400, 3200));
+}
+function monSwat(c, x, y) {
+  if (!Mon.chores.delete(c)) return;
+  Snd.fx.swat();
+  sfx('SWAT!', x, y - 44, { fs: 30, c: '#fff' });
+  c.style.pointerEvents = 'none';
+  c.animate([{ transform: 'none', opacity: 1 }, { transform: `translate(${pick([-1, 1]) * R(200, 320)}px,${R(-260, -120)}px) rotate(${R(-540, 540)}deg) scale(.6)`, opacity: 0 }],
+    { duration: 520, easing: 'cubic-bezier(.2,.6,.4,1)', fill: 'forwards' }).onfinish = () => c.remove();
+}
+async function monWin() {
+  const ms = performance.now() - Mon.t0, L = Mon.layer;
+  monStop();
+  flash(1); Snd.fx.boom(); shakeScreen(14, 700);
+  FX.rocks(...toScreen(930, 700), 40, { power: 1.6, size: 1.4 });
+  FX.burst(...toScreen(930, 700), 80, ['#ffd23f', '#fff', '#c9a6ff']);
+  Mon.hp.classList.remove('on'); Mon.eye.classList.remove('lit');
+  const ko = sfx('K.O.!', 830, 690, { fs: 150, r: -8, hold: true });
+  L.appendChild(ko);
+  await wait(1100);
+  PANEL.p5.classList.remove('monday'); Mon.rain.classList.remove('on');
+  Snd.fx.fanfare();
+  await wait(700);
+  fadeRemove(ko, 400);
+  const prev = +load('slayer'), isBest = !prev || ms < prev;
+  if (isBest) save('slayer', String(Math.round(ms)));
+  const m = svgEl(MEDAL, 'medal', L, 827, 650, 150, 188);
+  m.animate([{ transform: 'scale(0) rotate(-200deg)' }, { transform: 'scale(1.2) rotate(10deg)', offset: .7 }, { transform: 'none' }], { duration: 800, easing: 'cubic-bezier(.2,1.4,.4,1)' });
+  FX.confetti(...toScreen(827, 600), 160, { power: 900 });
+  L.appendChild(sfx('MONDAY SLAYER!', 827, 790, { fs: 50, r: -4, hold: true }));
+  monCap(TEXT.monB);
+  setHint(`🏅 <b>Monday Slayer!</b> ${MON.hits} hits in ${fmtS(ms)}.${prev ? isBest ? ' <small>New best!</small>' : ` <small>Best: ${fmtS(prev)}</small>` : ''}`);
+  Mon.tries = 0;
+  monEnd('↻ REMATCH');
+}
+async function monLose() {
+  const left = MON.hits - Mon.hits;
+  monStop();
+  Snd.fx.laugh(); shake(PANEL.p5, 6, 600);
+  sfx('TIME’S UP!', 827, 640, { fs: 76, r: -6, dur: 2000, c: '#cfd8ff' });
+  await wait(700);
+  sfx('MWAHAHA!', 900, 560, { fs: 44, c: '#c9a6ff', dur: 1600 });
+  Mon.tries++;
+  setHint(`☕ Monday wins this round. ${left <= 5 ? 'So close: only' : 'Still'} ${left} ${left === 1 ? 'hit' : 'hits'} to go! <small>Coffee buys you ${Mon.tries * MON.coffee} extra seconds.</small>`);
+  monEnd(`☕ TRY AGAIN +${Mon.tries * MON.coffee} S`);
+}
+function monEnd(again) {
+  showAct(again, () => monRound(false));
+  next(Mon.from === 'title' ? 'TITLE' : 'PARTY').then(monExit);
+}
+function monExit() {
+  monTeardown();
+  Mon.on = false;
+  if (Mon.from === 'title') { location.reload(); return; }
+  state.free = Mon.prev.free; state.step = Mon.prev.step;
+  barEl.classList.add('hide');
+  cam(FULL, 900); FX.rain(80);
+  openFinale(false);
+}
 
 $('#bSong').addEventListener('click', () => { Snd.song(); FX.show(4000); });
 $('#bView').addEventListener('click', () => { Snd.fx.blip(); viewComic(); });
@@ -1693,6 +1987,14 @@ tname.querySelectorAll('span').forEach(s => s.addEventListener('click', () => {
   s.animate([{ translate: '0 0' }, { translate: '0 -60px', offset: .4 }, { translate: '0 0' }], { duration: 500, easing: 'cubic-bezier(.3,1.6,.5,1)' });
 }));
 $('#start').addEventListener('click', start);
+if (allEggs()) {
+  const old = $('.tnote .tc:nth-child(2)'), b = document.createElement('button');
+  b.className = 'tc tsecret'; b.id = 'tSecret';
+  b.style.cssText = old.style.cssText; b.style.setProperty('--c', '#1d1240');
+  b.innerHTML = '<span class="ti">😈</span><b>SECRET LEVEL</b><small>it’s monday again</small>';
+  b.addEventListener('click', () => enterMonday('title'));
+  old.replaceWith(b);
+}
 cam(FULL, 0);
 
 async function start() {
